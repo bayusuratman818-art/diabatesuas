@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediPredict | Sistem Deteksi Dini Diabetes</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top glass-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="bi bi-heart-pulse-fill text-danger me-2"></i>MediPredict
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="/">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#prediksi">Mulai Prediksi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Tentang Project</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="hero-badge mb-3">AI-Powered Health Analytics</div>
+                    <h1 class="display-4 fw-bold text-white mb-3">Sistem Prediksi Risiko Diabetes</h1>
+                    <p class="lead text-light mb-4 opacity-75">
+                        Ketahui risiko diabetes Anda sejak dini. Sistem ini menggunakan model *Machine Learning* (Random Forest) dengan akurasi tinggi berdasarkan rekam medis Anda.
+                    </p>
+                    <a href="#prediksi" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">
+                        Cek Risiko Sekarang <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container main-container" id="prediksi">
+        
+        <!-- Error Alert -->
+        {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+
+        <!-- Prediction Result (Tampil jika ada hasil prediksi) -->
+        <!-- Prediction Result -->
+{% if prediction %}
+
+<div class="row justify-content-center mb-5" id="hasil-prediksi">
+
+<div class="col-lg-9">
+
+<div class="card result-card border-0 shadow-lg overflow-hidden">
+
+<div class="card-body p-5 text-center
+{{ 'bg-danger-soft'
+if risk=='high'
+else
+'bg-success-soft'
+}}
+">
+
+{% if risk=="high" %}
+
+<div class="icon-circle bg-danger text-white mb-4 mx-auto">
+<i class="bi bi-heart-pulse-fill fs-1"></i>
+</div>
+
+<h2 class="text-danger fw-bold mb-3">
+
+Risiko Tinggi Diabetes
+
+</h2>
+
+<p class="text-muted">
+
+Model Random Forest mendeteksi pola
+yang mengarah ke diabetes.
+
+Disarankan melakukan pemeriksaan
+lebih lanjut.
+
+</p>
+
+{% else %}
+
+<div class="icon-circle bg-success text-white mb-4 mx-auto">
+<i class="bi bi-check-lg fs-1"></i>
+</div>
+
+<h2 class="text-success fw-bold mb-3">
+
+Risiko Rendah Diabetes
+
+</h2>
+
+<p class="text-muted">
+
+Tidak ditemukan indikasi diabetes
+yang signifikan.
+
+Tetap pertahankan pola hidup sehat.
+
+</p>
+
+{% endif %}
+
+<hr>
+
+<div class="mt-4">
+
+<h5 class="fw-bold mb-3">
+
+Probabilitas Prediksi AI
+
+</h5>
+
+<div class="mb-3">
+
+<label class="fw-semibold">
+
+Diabetes
+
+</label>
+
+<div class="progress">
+
+<div
+class="
+progress-bar
+bg-danger
+"
+
+style="
+width:
+{{ diabetes_prob }}%;
+"
+>
+
+{{ diabetes_prob }}%
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+
+<label class="fw-semibold">
+
+Tidak Diabetes
+
+</label>
+
+<div class="progress">
+
+<div
+class="
+progress-bar
+bg-success
+"
+
+style="
+width:
+{{ normal_prob }}%;
+"
+>
+
+{{ normal_prob }}%
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<hr class="my-4">
+
+<div class="row">
+
+<div class="col-md-4">
+
+<div class="stats-card">
+
+<h2 class="text-primary">
+
+90.04%
+
+</h2>
+
+<p>
+
+Accuracy
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="stats-card">
+
+<h2 class="text-success">
+
+91%
+
+</h2>
+
+<p>
+
+Recall
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="stats-card">
+
+<h2 class="text-danger">
+
+RF
+
+</h2>
+
+<p>
+
+Random Forest
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<a
+href="/"
+class="
+btn
+btn-primary
+rounded-pill
+px-5
+mt-4
+"
+>
+
+<i class="bi bi-arrow-repeat"></i>
+
+Prediksi Lagi
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+document
+.addEventListener(
+"DOMContentLoaded",
+
+function(){
+
+document
+.getElementById(
+"hasil-prediksi"
+)
+
+.scrollIntoView({
+
+behavior:
+"smooth"
+
+})
+
+}
+
+)
+
+</script>
+
+{% endif %}
+
+        <!-- Form Card -->
+        <div class="card form-card shadow-lg border-0">
+            <div class="card-header bg-white border-0 pt-4 pb-0 text-center">
+                <h3 class="fw-bold text-dark"><i class="bi bi-clipboard2-pulse text-primary me-2"></i>Input Data Rekam Medis</h3>
+                <p class="text-muted small">Silakan isi formulir di bawah ini dengan data yang valid</p>
+            </div>
+            <div class="card-body p-4 p-md-5">
+                <form method="POST" action="/predict#hasil-prediksi">
+                    <div class="row g-4">
+                        
+                        <!-- Gender -->
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select class="form-select" id="gender" name="gender" required>
+                                    <option value="" disabled selected>Pilih Gender</option>
+                                    <option value="Female" {% if form_data and form_data.gender == 'Female' %}selected{% endif %}>Perempuan</option>
+                                    <option value="Male" {% if form_data and form_data.gender == 'Male' %}selected{% endif %}>Laki-laki</option>
+                                    <option value="Other" {% if form_data and form_data.gender == 'Other' %}selected{% endif %}>Lainnya</option>
+                                </select>
+                                <label for="gender"><i class="bi bi-gender-ambiguous me-1"></i> Gender</label>
+                            </div>
+                        </div>
+
+                        <!-- Age -->
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="age" name="age" step="0.1" min="0" max="120" placeholder="Umur" required value="{{ form_data.age if form_data else '' }}">
+                                <label for="age"><i class="bi bi-calendar-event me-1"></i> Umur (Tahun)</label>
+                            </div>
+                        </div>
+
+                        <!-- Hypertension -->
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select class="form-select" id="hypertension" name="hypertension" required>
+                                    <option value="" disabled selected>Pilih Status</option>
+                                    <option value="0" {% if form_data and form_data.hypertension == '0' %}selected{% endif %}>Tidak</option>
+                                    <option value="1" {% if form_data and form_data.hypertension == '1' %}selected{% endif %}>Ya</option>
+                                </select>
+                                <label for="hypertension"><i class="bi bi-activity me-1"></i> Hipertensi (Darah Tinggi)</label>
+                            </div>
+                        </div>
+
+                        <!-- Heart Disease -->
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select class="form-select" id="heart_disease" name="heart_disease" required>
+                                    <option value="" disabled selected>Pilih Status</option>
+                                    <option value="0" {% if form_data and form_data.heart_disease == '0' %}selected{% endif %}>Tidak</option>
+                                    <option value="1" {% if form_data and form_data.heart_disease == '1' %}selected{% endif %}>Ya</option>
+                                </select>
+                                <label for="heart_disease"><i class="bi bi-heart me-1"></i> Penyakit Jantung</label>
+                            </div>
+                        </div>
+
+                        <!-- Smoking History -->
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select class="form-select" id="smoking_history" name="smoking_history" required>
+                                    <option value="" disabled selected>Pilih Riwayat</option>
+                                    <option value="never" {% if form_data and form_data.smoking_history == 'never' %}selected{% endif %}>Tidak Pernah</option>
+                                    <option value="current" {% if form_data and form_data.smoking_history == 'current' %}selected{% endif %}>Perokok Aktif</option>
+                                    <option value="former" {% if form_data and form_data.smoking_history == 'former' %}selected{% endif %}>Mantan Perokok</option>
+                                    <option value="ever" {% if form_data and form_data.smoking_history == 'ever' %}selected{% endif %}>Pernah Merokok</option>
+                                    <option value="not current" {% if form_data and form_data.smoking_history == 'not current' %}selected{% endif %}>Bukan Perokok Aktif</option>
+                                    <option value="No Info" {% if form_data and form_data.smoking_history == 'No Info' %}selected{% endif %}>Tidak Ada Info</option>
+                                </select>
+                                <label for="smoking_history"><i class="bi bi-lungs me-1"></i> Riwayat Merokok</label>
+                            </div>
+                        </div>
+
+                        <!-- BMI -->
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="bmi" name="bmi" step="0.01" min="10" max="100" placeholder="BMI" required value="{{ form_data.bmi if form_data else '' }}">
+                                <label for="bmi"><i class="bi bi-person-bounding-box me-1"></i> BMI (Body Mass Index)</label>
+                            </div>
+                        </div>
+
+                        <!-- HbA1c Level -->
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="hba1c" name="hba1c" step="0.1" min="0" max="20" placeholder="HbA1c Level" required value="{{ form_data.hba1c if form_data else '' }}">
+                                <label for="hba1c"><i class="bi bi-droplet-half me-1"></i> Level HbA1c (%)</label>
+                            </div>
+                        </div>
+
+                        <!-- Blood Glucose Level -->
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="glucose" name="glucose" step="0.1" min="0" max="500" placeholder="Glucose Level" required value="{{ form_data.glucose if form_data else '' }}">
+                                <label for="glucose"><i class="bi bi-moisture me-1"></i> Level Gula Darah (mg/dL)</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 shadow submit-btn">
+                            <i class="bi bi-cpu-fill me-2"></i> Jalankan Analisis AI
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0 text-muted">&copy; 2026 Project UAS AI & Web Development. Dikembangkan dengan Flask & Bootstrap.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

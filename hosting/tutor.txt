@@ -1,0 +1,337 @@
+# Dokumentasi Upload Project Flask ke GitHub dan Railway
+
+## 1. Instalasi Git
+
+Buka PowerShell sebagai Administrator, kemudian jalankan perintah berikut:
+
+```bash
+winget install --id Git.Git -e --source winget
+```
+
+Tunggu hingga proses instalasi selesai.
+
+Untuk memastikan Git telah terinstal:
+
+```bash
+git --version
+```
+
+Contoh hasil:
+
+```bash
+git version 2.50.1.windows.1
+```
+
+---
+
+## 2. Konfigurasi Git
+
+Setelah Git terinstal, lakukan konfigurasi nama pengguna dan email GitHub.
+
+```bash
+git config --global user.name "maryotkn-rgb"
+git config --global user.email "emailanda@gmail.com"
+```
+
+Cek konfigurasi:
+
+```bash
+git config --global user.name
+git config --global user.email
+```
+
+Contoh hasil:
+
+```bash
+maryotkn-rgb
+emailanda@gmail.com
+```
+
+---
+
+## 3. Membuat Repository di GitHub
+
+1. Login ke GitHub.
+2. Klik tombol New Repository.
+3. Isi nama repository:
+
+```text
+RF-Prediksi-Kelulusan
+```
+
+4. Pilih Public.
+5. Klik Create Repository.
+
+---
+
+## 4. Membuka Folder Project
+
+Buka PowerShell pada folder project Flask.
+
+Contoh:
+
+```bash
+cd D:\Kelulusan
+```
+
+Cek isi folder:
+
+```bash
+dir
+```
+
+Pastikan terdapat file:
+
+```text
+app.py
+requirements.txt
+runtime.txt
+Procfile
+templates/
+static/
+models/
+```
+
+---
+
+## 5. Inisialisasi Git Repository
+
+Jalankan:
+
+```bash
+git init
+```
+
+Output:
+
+```text
+Initialized empty Git repository
+```
+
+---
+
+## 6. Menambahkan Remote GitHub
+
+Salin URL repository GitHub.
+
+Contoh:
+
+```bash
+git remote add origin https://github.com/maryotkn-rgb/RF-Prediksi-kelulusan.git
+```
+
+Cek remote:
+
+```bash
+git remote -v
+```
+
+---
+
+## 7. Menambahkan Seluruh File
+
+Tambahkan seluruh file project:
+
+```bash
+git add .
+```
+
+Cek status:
+
+```bash
+git status
+```
+
+Output akan menampilkan file yang siap diupload.
+
+---
+
+## 8. Commit Project
+
+Buat commit pertama:
+
+```bash
+git commit -m "Upload project Flask"
+```
+
+Contoh hasil:
+
+```text
+[master (root-commit) abc123]
+Upload project Flask
+```
+
+---
+
+## 9. Mengubah Branch Menjadi Main
+
+```bash
+git branch -M main
+```
+
+---
+
+## 10. Upload Project ke GitHub
+
+Push project:
+
+```bash
+git push -u origin main
+```
+
+Jika muncul halaman login GitHub:
+
+1. Login akun GitHub.
+2. Berikan izin akses.
+3. Tunggu proses upload selesai.
+
+Contoh hasil:
+
+```text
+Enumerating objects...
+Counting objects...
+Writing objects...
+Total ...
+To https://github.com/...
+```
+
+---
+
+## 11. Verifikasi Upload
+
+Buka repository GitHub.
+
+Pastikan seluruh file telah muncul:
+
+```text
+app.py
+requirements.txt
+runtime.txt
+Procfile
+templates/
+static/
+models/
+```
+
+---
+
+# Deploy ke Railway
+
+## 12. Login Railway
+
+Buka:
+
+https://railway.app
+
+Pilih:
+
+```text
+Login with GitHub
+```
+
+---
+
+## 13. Membuat Project Baru
+
+Klik:
+
+```text
+New Project
+```
+
+Pilih:
+
+```text
+Deploy from GitHub Repo
+```
+
+---
+
+## 14. Memilih Repository
+
+Pilih repository:
+
+```text
+RF-Prediksi-kelulusan
+```
+
+Railway akan otomatis membaca project Flask.
+
+---
+
+## 15. Konfigurasi Procfile
+
+Buat file:
+
+```text
+Procfile
+```
+
+Isi:
+
+```text
+web: gunicorn app:app
+```
+
+Keterangan:
+
+* app pertama = nama file app.py
+* app kedua = objek Flask
+
+---
+
+## 16. Konfigurasi requirements.txt
+
+Buat:
+
+```text
+requirements.txt
+```
+
+Contoh:
+
+```text
+Flask
+gunicorn
+pandas
+numpy
+scikit-learn
+joblib
+```
+
+---
+
+## 17. Deploy Project
+
+Klik:
+
+```text
+Deploy
+```
+
+Railway akan melakukan:
+
+```text
+Build Project
+Install Requirements
+Start Gunicorn
+Deploy Application
+```
+
+---
+
+## 18. Mendapatkan Link Website
+
+Jika berhasil akan muncul:
+
+```text
+https://nama-project.up.railway.app
+```
+
+Contoh:
+
+```text
+https://rf-prediksi-kelulusan.up.railway.app
+```
+
+Website Flask sekarang dapat diakses secara online.
