@@ -1,497 +1,222 @@
 /* ==========================
-GLOBAL
+GLOBAL & TYPOGRAPHY
 ========================== */
-
-body{
-    font-family:'Segoe UI',sans-serif;
-
-    background:
-    linear-gradient(
-        180deg,
-        #f7faff,
-        #eef4ff
-    );
-
-    color:#1e293b;
-
-    overflow-x:hidden;
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #f8fafc;
+    color: #0f172a;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
-
-
 
 /* ==========================
-NAVBAR
+COLOR PALETTES & GRADIENTS
 ========================== */
-
-.glass-navbar{
-
-background:
-rgba(
-20,
-20,
-20,
-0.45
-);
-
-backdrop-filter:
-blur(
-15px
-);
-
-padding:
-18px 0;
-
+.text-gradient {
+    background: linear-gradient(90deg, #0ea5e9, #14b8a6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.navbar-brand{
+.bg-gradient-primary { background: linear-gradient(135deg, #38bdf8, #0d9488); }
+.bg-gradient-danger { background: linear-gradient(135deg, #fb7185, #e11d48); }
+.bg-gradient-success { background: linear-gradient(135deg, #34d399, #059669); }
 
-font-size:
-1.4rem;
-
-}
-
-.nav-link{
-
-color:white !important;
-
-font-weight:500;
-
-margin-left:20px;
-
-}
-
-.nav-link:hover{
-
-color:#60a5fa !important;
-
-}
-
-
+.bg-primary-soft { background-color: #f0fdfa; }
+.bg-success-soft { background-color: #ecfdf5; }
+.bg-info-soft { background-color: #f0f9ff; }
 
 /* ==========================
-HERO
+NAVBAR GLASSMORPHISM
 ========================== */
-
-.hero-section{
-
-background:
-linear-gradient(
-135deg,
-#0f172a,
-#1e3a8a
-);
-
-padding:
-170px 20px
-140px;
-
+.glass-navbar {
+    background: rgba(15, 23, 42, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 20px 0;
+    transition: all 0.3s ease;
 }
 
-.hero-badge{
-
-display:inline-block;
-
-padding:
-10px 22px;
-
-background:
-rgba(
-255,
-255,
-255,
-0.15
-);
-
-color:white;
-
-border-radius:
-50px;
-
-font-size:
-14px;
-
-backdrop-filter:
-blur(
-10px
-);
-
+.glass-navbar.scrolled {
+    background: rgba(15, 23, 42, 0.95);
+    padding: 12px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.hero-section h1{
-
-font-size:
-3rem;
-
+.brand-icon {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #0ea5e9, #14b8a6);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
 
-.hero-section p{
-
-max-width:
-750px;
-
-margin:auto;
-
+.nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+    transition: 0.3s;
 }
 
-.hero-section .btn{
-
-padding:
-15px 40px;
-
+.nav-link:hover, .nav-link.active {
+    color: #14b8a6 !important;
 }
-
-
 
 /* ==========================
-MAIN
+HERO SECTION
 ========================== */
-
-.main-container{
-
-margin-top:
--80px;
-
+.hero-section {
+    background: linear-gradient(135deg, #0f172a, #115e59);
+    padding: 200px 20px 150px;
+    overflow: hidden;
 }
 
+.glow-bg {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+    z-index: 0;
+}
 
+.hero-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+}
 
 /* ==========================
-FORM
+BUTTONS
 ========================== */
-
-.form-card{
-
-border-radius:
-30px;
-
-overflow:
-hidden;
-
+.btn-gradient {
+    background: linear-gradient(135deg, #0ea5e9, #0d9488);
+    color: white;
+    border: none;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.form-control,
-.form-select{
-
-border-radius:
-18px;
-
-height:
-60px;
-
+.btn-gradient:hover {
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(13, 148, 136, 0.3) !important;
 }
-
-.form-floating label{
-
-color:#64748b;
-
-}
-
-.submit-btn{
-
-padding:
-16px 50px;
-
-font-weight:
-600;
-
-}
-
-
 
 /* ==========================
-RESULT CARD
+CARDS & FEATURES
 ========================== */
-
-.result-card{
-
-border-radius:
-30px;
-
-overflow:
-hidden;
-
-animation:
-fadeUp
-.7s
-ease;
-
+.feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
 }
 
-.bg-danger-soft{
-
-background:
-#fff5f5;
-
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
-.bg-success-soft{
-
-background:
-#f0fff4;
-
+.icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
 }
 
-.icon-circle{
-
-width:
-120px;
-
-height:
-120px;
-
-border-radius:
-50%;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
+.step-number {
+    width: 45px;
+    height: 45px;
+    background: #e2e8f0;
+    color: #475569;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 20px;
+    flex-shrink: 0;
 }
-
-.icon-circle i{
-
-font-size:
-45px;
-
-}
-
-
 
 /* ==========================
-PROGRESS
+FORM ELEMENTS
 ========================== */
-
-.progress{
-
-height:
-32px;
-
-border-radius:
-50px;
-
-background:
-#e2e8f0;
-
-overflow:
-hidden;
-
+.form-card {
+    border-radius: 30px;
+    overflow: hidden;
 }
 
-.progress-bar{
-
-font-size:
-15px;
-
-font-weight:
-700;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
+.form-control, .form-select {
+    padding: 12px 20px;
+    font-size: 15px;
+    border-radius: 12px;
 }
 
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
+    border: none;
+}
 
+.form-label {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
 
 /* ==========================
-STATISTICS
+RESULT SECTION
 ========================== */
-
-.stats-card{
-
-background:white;
-
-padding:
-25px;
-
-border-radius:
-20px;
-
-box-shadow:
-0
-10px
-30px
-rgba(
-0,
-0,
-0,
-0.05
-);
-
-transition:
-0.3s;
-
+.result-card {
+    border-radius: 30px;
 }
 
-.stats-card:hover{
-
-transform:
-translateY(
--8px
-);
-
+.icon-circle-lg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
 }
-
-.stats-card h2{
-
-font-weight:
-800;
-
-}
-
-.stats-card p{
-
-margin-bottom:
-0;
-
-color:
-#64748b;
-
-}
-
-
 
 /* ==========================
-BUTTON
+ANIMATIONS
 ========================== */
+.animate-fade-in { animation: fadeIn 1s ease both; }
+.animate-slide-up { animation: slideUp 0.8s ease both; }
+.animate-slide-up-delay { animation: slideUp 0.8s ease 0.2s both; }
+.animate-slide-up-delay-2 { animation: slideUp 0.8s ease 0.4s both; }
 
-.btn-primary{
-
-background:
-linear-gradient(
-135deg,
-#2563eb,
-#1d4ed8
-);
-
-border:none;
-
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-.btn-primary:hover{
-
-transform:
-translateY(
--2px
-);
-
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
-
 
 /* ==========================
-ALERT
+RESPONSIVE ADJUSTMENTS
 ========================== */
-
-.alert{
-
-border-radius:
-20px;
-
-}
-
-
-
-/* ==========================
-FOOTER
-========================== */
-
-footer{
-
-margin-top:
-100px;
-
-}
-
-
-
-/* ==========================
-ANIMATION
-========================== */
-
-@keyframes fadeUp{
-
-from{
-
-opacity:0;
-
-transform:
-translateY(
-30px
-);
-
-}
-
-to{
-
-opacity:1;
-
-transform:
-translateY(
-0
-);
-
-}
-
-}
-
-
-
-/* ==========================
-RESPONSIVE
-========================== */
-
-@media(max-width:768px){
-
-.hero-section{
-
-padding:
-150px
-20px
-120px;
-
-}
-
-.hero-section h1{
-
-font-size:
-2rem;
-
-}
-
-.form-card{
-
-border-radius:
-20px;
-
-}
-
-.icon-circle{
-
-width:
-90px;
-
-height:
-90px;
-
-}
-
-.progress{
-
-height:
-26px;
-
-}
-
-.submit-btn{
-
-width:
-100%;
-
-}
-
+@media (max-width: 768px) {
+    .hero-section { padding: 150px 20px 100px; }
+    .hero-section h1 { font-size: 2.2rem; }
+    .result-card .col-md-5, .result-card .col-md-7 { padding: 30px !important; }
 }
